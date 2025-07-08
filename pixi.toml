@@ -1,5 +1,5 @@
 [workspace]
-authors = ["CW team <hammadalibutt30@gmail.com>"]
+authors = ["Hammad-hab <hammadalibutt30@gmail.com>"]
 channels = ["https://conda.modular.com/max-nightly", "conda-forge"]
 name = "MojoINI"
 platforms = ["osx-arm64"]
