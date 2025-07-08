@@ -25,4 +25,8 @@ fn test_sections() raises:
     var pair2 = section1['field2']
     assert_true(pair1 == 'some key', 'pair1 should be a equal to "some key"!')
     assert_true(pair2 == 'a serious value!', 'pair1 should be a equal to "a serious value!"!')
-    
+
+
+fn main() raises:
+    test_read()
+    test_sections()
