@@ -5,7 +5,7 @@ fn test_read() raises:
 
     var parser = INIParser()
 
-    var parsed = parser.read_file("./samples/sample1.ini")
+    var parsed = parser.read_file("./test/samples/sample1.ini")
     assert_true(parsed.getItem('name')['value'] == 'John Doe', "Expected Name of Sample1 to be John Doe")
     assert_true(parsed.getItem('msg')['value'] == "Hello World!", "Expected Message of Sample1 to be 'Hello World!'")
 
@@ -15,7 +15,7 @@ fn test_sections() raises:
 
     var parser = INIParser()
 
-    var parsed = parser.read_file("./samples/sample2.ini")
+    var parsed = parser.read_file("./test/samples/sample2.ini")
     var section1 = parsed.getItem('section1')
     var special_number = parsed.getItem('special_number')
     assert_true(section1['type'] == 'INIField', 'Seciton1 should be a field!')
