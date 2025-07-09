@@ -25,7 +25,7 @@ tests:
   - script:
       - if: unix
         then:
-          - mojo test test
+          - mojo test test/test_parser.mojo
     files:
       recipe:
         - test_parser.mojo
