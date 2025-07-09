@@ -17,6 +17,9 @@ struct INIParser:
         with open(file, 'r') as f:
                 var content = f.read() 
                 return self._parse(content) 
+    
+    fn parse_contents(self, contents: String) raises -> Section:
+        return self._parse(contents) 
 
     fn _parse(self, content: String) -> Section:
         var strlines = content.split('\n')
