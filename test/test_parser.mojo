@@ -28,5 +28,5 @@ fn test_sections() raises:
 
 
 fn main() raises:
-    test_read()
-    test_sections()
+    test_read() # test basic reading
+    test_sections() # test sections
