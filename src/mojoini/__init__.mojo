@@ -46,12 +46,14 @@ struct INIParser:
                 var line_w_comments = line.split(";")
                 fline = line_w_comments[0]
 
-            if is_section_def(line):
+            if is_section_def(fline):
                 if section_push_name != 'Na': # Push the old storage back in if a new section is found
                     main.setItem(section_push_name, secondary)
                     secondary.clear()
 
-                var section_name = line[1:-1]
+                var section_name = fline[1:-1]
+                if is_int(section_name[0]):
+                    raise Error('Syntax Error: Section name is numeric at line \n' + fline)
                 push_mode = 1
                 section_push_name = section_name
                 continue
@@ -59,11 +61,11 @@ struct INIParser:
             if is_key_value_pair(fline):
                 key, value = unpack_key_value(fline)
                 if is_int(key[0]):
-                    raise Error('Syntax Error: Key is numeric at line \n' + line)
+                    raise Error('Syntax Error: Key is numeric at line \n' + fline)
                 if has_invalid_char(key):
-                    raise Error('Syntax Error: Key is invalid at line \n' + line)
+                    raise Error('Syntax Error: Key is invalid at line \n' + fline)
                 if has_invalid_char(value) and not is_value_string(value):
-                    raise Error('Syntax Error: Value is invalid at line \n' + line )
+                    raise Error('Syntax Error: Value is invalid at line \n' + fline )
                 
                 if '"' in value:
                     value = value.replace('"', '')
@@ -79,9 +81,14 @@ struct INIParser:
                 continue
         
             # syntax errors:
-            if line.startswith('[') and line.endswith(']') and len(line) <= 2:
-                raise Error('Parsing failed, invalid section define at ' + line)
+            if fline.strip().startswith('[') and fline.strip().endswith(']'):
+                print('Im here' + fline)
+                if len(fline.strip()) <= 2:
+                    raise Error('Parsing failed, invalid section define at ' + fline)
 
-            if '=' in line and len(line) < 3 or line == '=':
-                raise Error('Parsing failed, invalid syntax at ' + line)
+                if is_int(fline.strip()[1]):
+                    raise Error('Parsing failed, invalid section define at ' + fline)
+
+            if '=' in fline and len(line) < 3 or fline == '=':
+                raise Error('Parsing failed, invalid syntax at ' + fline)
         return main

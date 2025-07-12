@@ -36,6 +36,6 @@ fn is_section_def(line: String) -> Bool:
 
 fn unpack_key_value(line: String) -> Tuple[String, String]:
     var l = line.split("=", 1)
-    var k = l[0]
-    var v = l[1]
-    return (k, v)
+    var k = l[0].replace(' ', '')
+    var v: String = String(l[1].strip()) # remove trailing whitespaces
+    return (k, v) 
