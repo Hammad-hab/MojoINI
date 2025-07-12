@@ -15,14 +15,15 @@ struct INIParser:
 
     fn read_file(self, file: String) raises -> Section:
         with open(file, 'r') as f:
-                var content = f.read() 
+                var content = f.read()
                 return self._parse(content) 
     
     fn parse_contents(self, contents: String) raises -> Section:
         return self._parse(contents) 
 
-    fn _parse(self, content: String) -> Section:
+    fn _parse(self, content: String) raises -> Section:
         var strlines = content.split('\n')
+        strlines.append('\n')
         var main: Section = {}
         var push_mode = 0
         var secondary: StringDict = StringDict()
@@ -53,9 +54,17 @@ struct INIParser:
                 var section_name = line[1:-1]
                 push_mode = 1
                 section_push_name = section_name
+                continue
 
             if is_key_value_pair(fline):
                 key, value = unpack_key_value(fline)
+                if is_int(key[0]):
+                    raise Error('Syntax Error: Key is numeric at line \n' + line)
+                if has_invalid_char(key):
+                    raise Error('Syntax Error: Key is invalid at line \n' + line)
+                if has_invalid_char(value) and not is_value_string(value):
+                    raise Error('Syntax Error: Value is invalid at line \n' + line )
+                
                 if '"' in value:
                     value = value.replace('"', '')
                     
@@ -67,5 +76,12 @@ struct INIParser:
                 elif push_mode == 1:
                     secondary['type'] = 'INIField'
                     secondary[key] = value
+                continue
+        
+            # syntax errors:
+            if line.startswith('[') and line.endswith(']') and len(line) <= 2:
+                raise Error('Parsing failed, invalid section define at ' + line)
 
+            if '=' in line and len(line) < 3 or line == '=':
+                raise Error('Parsing failed, invalid syntax at ' + line)
         return main

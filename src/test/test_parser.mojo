@@ -15,7 +15,7 @@ fn test_sections() raises:
 
     var parser = INIParser()
 
-    var parsed = parser.parse_contents('special_number=0\n[section1]\nfield1="some key"\nfield2="a serious value!"')
+    var parsed = parser.parse_contents('special_number=0\n\n[section1]\nfield1="some key"\nfield2="a serious value!"\n')
     var section1 = parsed.getItem('section1')
     var special_number = parsed.getItem('special_number')
     assert_true(section1['type'] == 'INIField', 'Seciton1 should be a field!')
@@ -28,5 +28,5 @@ fn test_sections() raises:
 
 
 fn main() raises:
-    test_read() # test basic reading
-    test_sections() # test sections
+    test_read()
+    test_sections()

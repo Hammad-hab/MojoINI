@@ -9,7 +9,7 @@ package:
 
 source:
   - git: https://github.com/Hammad-hab/MojoINI.git
-    rev: 790169f5999b7559bb70edee4ec8704ff456c050
+    rev: e2c51bdccb78b29fb403c8ff632af4d84ba292ae
 
 build:
   number: 0

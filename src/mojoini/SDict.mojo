@@ -11,6 +11,5 @@ struct SDict:
         self.storage[key] = value
     
     fn getItem(self, key: String) raises -> Dict[String, String]:
-        print(key)
         var out = self.storage[key]
         return out
