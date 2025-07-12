@@ -27,8 +27,9 @@ tests:
         then:
           - mojo test
     files:
-      recipe:
+      source:
         - test_parser.mojo
+        - test_perf.mojo
 
 about:
   homepage: https://github.com/Hammad-hab/MojoINI.git
