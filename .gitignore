@@ -3,3 +3,4 @@
 .pixi
 *.egg-info
 .DS_Store
+chart.py

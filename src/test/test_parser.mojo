@@ -13,7 +13,6 @@ fn test_read() raises:
 fn test_sections() raises:
 
     var parser = INIParser()
-
     var parsed = parser.parse_contents('special_number=0\n\n[section1]\nfield1="some key"\nfield2="a serious value!"\n')
     var section1 = parsed.getItem('section1')
     var special_number = parsed.getItem('special_number')

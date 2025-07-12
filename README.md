@@ -1,4 +1,7 @@
-# MojoINI
+<center>
+<img src="image.png" alt="performance test"/>
+</center>
+
 
 MojoINI is a simple, lightweight INI file parser written in [Mojo](https://www.modular.com/mojo). It allows you to read and process INI configuration files with support for sections and key-value pairs.
 
@@ -8,6 +11,11 @@ MojoINI is a simple, lightweight INI file parser written in [Mojo](https://www.m
 - Handles comments and empty lines
 - Simple API for reading configuration values
 - Written in Mojo for performance and simplicity
+
+## Performance Comparision
+Following are the results of running a test involving `MojoINI` and python's `configparser` parsing the file 'monster.ini' with 5000 sections and 20keys per section (100,000 keys)
+
+<img src="performance_ggplot.png" alt="performance test"/>
 
 ## Project Structure
 
@@ -68,6 +76,7 @@ print(section1['field1'])  # Output: some key
 print(section1['field2'])  # Output: a serious value!
 ```
 
+
 ## API Reference
 
 ### `INIParser`
@@ -94,7 +103,7 @@ print(section1['field2'])  # Output: a serious value!
 To run the test suite:
 
 ```sh
-mojo test/test_parser.mojo
+(MojoINI/src) ~ mojo test 
 ```
 
 ## License
